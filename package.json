@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "prisma generate && prisma db push",
+    "predev": "prisma generate",
+    "db:update": "prisma generate && prisma db push",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.23.3",
+    "@clerk/nextjs": "^4.23.2",
+    "@clerk/themes": "^1.7.5",
     "@cloudinary/react": "^1.11.2",
     "@cloudinary/url-gen": "^1.11.2",
     "@nextui-org/react": "^2.1.10",
