@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import clsx from "clsx";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en">
         <body className={inter.className}>
-          <Providers>{children}</Providers>
+          <Providers className="flex flex-col min-h-screen">{children}</Providers>
         </body>
       </html>
      </ClerkProvider>

@@ -4,8 +4,8 @@ import React from "react";
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      {/* <Navbar /> */}
-      <main className=" flex flex-col">{children}</main>;
+      <Navbar />
+      <main className=" grow flex flex-col items-center justify-center">{children}</main>
     </>
   );
 };
