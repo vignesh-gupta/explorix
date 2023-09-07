@@ -1,10 +1,12 @@
-import Providers  from "@/components/providers";
 import "./globals.css";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
-import clsx from "clsx";
+
+import Providers  from "@/components/providers";
+import React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,12 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider appearance={{ baseTheme: dark }}>
+    <React.StrictMode>
+      <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
           <Providers className="flex flex-col min-h-screen">{children}</Providers>
         </body>
       </html>
      </ClerkProvider>
+    </React.StrictMode>
   );
 }

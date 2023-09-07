@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "prisma generate",
-    "db:update": "prisma generate && prisma db push",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "condev" : "convex dev"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.23.2",
@@ -20,6 +19,7 @@
     "@prisma/client": "^5.2.0",
     "@tailwindcss/typography": "^0.5.10",
     "clsx": "^2.0.0",
+    "convex": "^1.2.1",
     "framer-motion": "^10.16.2",
     "lucide-react": "^0.274.0",
     "next": "13.4.19",
