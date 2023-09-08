@@ -1,5 +1,5 @@
 import React from "react";
-import MDXEditor from "@/components/tailwind-exclude/MDXEditor";
+import MDXEditor from "@/components/MDXEditor";
 
 const ItineraryCreate = () => {
   return (
