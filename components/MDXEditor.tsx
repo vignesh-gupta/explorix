@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import "@mdxeditor/editor/style.css";
 import {
@@ -25,6 +25,8 @@ import {
   thematicBreakPlugin,
   toolbarPlugin,
 } from "@mdxeditor/editor";
+import { useTheme } from "next-themes";
+import clsx from "clsx";
 
 const MDXEditor = dynamic(
   () => import("@mdxeditor/editor").then((mod) => mod.MDXEditor),
@@ -40,20 +42,22 @@ export default function Editor() {
     console.log(editorRef.current);
   }, [editorRef])
 
+  const { theme } = useTheme();
+
   return (
     <>
       <MDXEditor
         contentEditableClassName="prose"
         ref={editorRef}
-        className="dark-theme dark-editor border-gray-600 border-1 rounded-lg w-full"
+        className={clsx("border-gray-600 border-1 rounded-lg w-full" , theme === "dark" && "dark-theme dark-editor")}
         markdown={markdown}
         plugins={[
           toolbarPlugin({
             toolbarContents: () => (
-              <>
+              <div className="flex flex-wrap">
                 <UndoRedo /> <BoldItalicUnderlineToggles /> <InsertTable />
                 <BlockTypeSelect /> <CreateLink />
-              </>
+              </div>
             ),
           }),
           listsPlugin(),
