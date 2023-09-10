@@ -33,32 +33,60 @@ const MDXEditor = dynamic(
   { ssr: false }
 );
 
-const markdown = "# Hello World";
+type EditorProps = {
+  isPreview?: boolean;
+  setItineraryForm?: React.Dispatch<
+    React.SetStateAction<{
+      destination: string;
+      days: number;
+      budget: number;
+      markdown: string;
+    }>
+  >;
+};
 
-export default function Editor() {
+export default function Editor({
+  isPreview = false,
+  setItineraryForm,
+}: EditorProps) {
   const editorRef = useRef(null);
 
-  useEffect(()=> {
-    console.log(editorRef.current);
-  }, [editorRef])
+  const markdown = "# Detailed Plan";
+
+  const handleChange = (md: string) => {
+    if (setItineraryForm) {
+      setItineraryForm((prev) => ({
+        ...prev,
+        markdown: md,
+      }));
+    }
+  };
 
   const { theme } = useTheme();
 
   return (
     <>
       <MDXEditor
-        contentEditableClassName="prose"
+        onChange={handleChange}
+        readOnly={isPreview}
         ref={editorRef}
-        className={clsx("border-gray-600 border-1 rounded-lg w-full" , theme === "dark" && "dark-theme dark-editor")}
+        className={clsx(
+          "border-gray-600 border-1 rounded-lg w-full",
+          theme === "dark" && "dark-theme dark-editor"
+        )}
         markdown={markdown}
         plugins={[
           toolbarPlugin({
-            toolbarContents: () => (
-              <div className="flex flex-wrap">
-                <UndoRedo /> <BoldItalicUnderlineToggles /> <InsertTable />
-                <BlockTypeSelect /> <CreateLink />
-              </div>
-            ),
+            toolbarContents: () => {
+              if (isPreview) return <></>;
+
+              return (
+                <div className="flex flex-wrap">
+                  <UndoRedo /> <BoldItalicUnderlineToggles /> <InsertTable />
+                  <BlockTypeSelect /> <CreateLink />
+                </div>
+              );
+            },
           }),
           listsPlugin(),
           quotePlugin(),
