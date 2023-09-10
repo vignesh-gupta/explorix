@@ -12,7 +12,7 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/react";
-import { SignUpButton, UserButton, currentUser, useClerk } from "@clerk/nextjs";
+import { SignInButton, UserButton, useClerk } from "@clerk/nextjs";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -69,13 +69,15 @@ export default function Navbar() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem>
+        <NavbarItem suppressHydrationWarning>
           {user ? (
-            <UserButton afterSignOutUrl="/" />
+            <button>
+              <UserButton afterSignOutUrl="/" />
+            </button>
           ) : (
-            <SignUpButton>
+            <SignInButton>
               <Button color="primary">Sign Up</Button>
-            </SignUpButton>
+            </SignInButton>
           )}
         </NavbarItem>
       </NavbarContent>

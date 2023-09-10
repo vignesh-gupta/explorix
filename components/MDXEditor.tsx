@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import dynamic from "next/dynamic";
 import "@mdxeditor/editor/style.css";
 import {
@@ -24,6 +24,7 @@ import {
   tablePlugin,
   thematicBreakPlugin,
   toolbarPlugin,
+  ListsToggle
 } from "@mdxeditor/editor";
 import { useTheme } from "next-themes";
 import clsx from "clsx";
@@ -35,11 +36,12 @@ const MDXEditor = dynamic(
 
 type EditorProps = {
   isPreview?: boolean;
+  markdown: string;
   setItineraryForm?: React.Dispatch<
     React.SetStateAction<{
       destination: string;
-      days: number;
-      budget: number;
+      days: string;
+      budget: string;
       markdown: string;
     }>
   >;
@@ -48,10 +50,9 @@ type EditorProps = {
 export default function Editor({
   isPreview = false,
   setItineraryForm,
+  markdown
 }: EditorProps) {
-  const editorRef = useRef(null);
 
-  const markdown = "# Detailed Plan";
 
   const handleChange = (md: string) => {
     if (setItineraryForm) {
@@ -69,7 +70,6 @@ export default function Editor({
       <MDXEditor
         onChange={handleChange}
         readOnly={isPreview}
-        ref={editorRef}
         className={clsx(
           "border-gray-600 border-1 rounded-lg w-full",
           theme === "dark" && "dark-theme dark-editor"
@@ -78,12 +78,12 @@ export default function Editor({
         plugins={[
           toolbarPlugin({
             toolbarContents: () => {
-              if (isPreview) return <></>;
+              if (isPreview) return null;
 
               return (
                 <div className="flex flex-wrap">
                   <UndoRedo /> <BoldItalicUnderlineToggles /> <InsertTable />
-                  <BlockTypeSelect /> <CreateLink />
+                  <BlockTypeSelect /> <CreateLink />  <ListsToggle />
                 </div>
               );
             },

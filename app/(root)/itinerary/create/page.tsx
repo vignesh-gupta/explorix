@@ -1,21 +1,23 @@
 "use client";
 
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import MDXEditor from "@/components/MDXEditor";
 import { Button, Input } from "@nextui-org/react";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 const ItineraryCreate = () => {
+  const itineraryFormSubmit = useMutation(api.itinerary.create);
+
   const [itineraryForm, setItineraryForm] = useState({
     destination: "",
-    days: 0,
-    budget: 0,
-    markdown: "",
+    days: "0",
+    budget: "0",
+    markdown: "# Detailed Plan",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log(e.target.value);
-
     setItineraryForm({
       ...itineraryForm,
       [e.target.name]: e.target.value,
@@ -25,6 +27,7 @@ const ItineraryCreate = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(itineraryForm);
+    itineraryFormSubmit(itineraryForm);
   };
 
   return (
@@ -33,7 +36,7 @@ const ItineraryCreate = () => {
         Create your own Itinerary plan
       </h1>
 
-      <form className=" flex flex-col gap-3">
+      <form onSubmit={handleSubmit} className=" flex flex-col gap-3">
         <Input
           isRequired
           type="text"
@@ -64,9 +67,15 @@ const ItineraryCreate = () => {
           />
         </div>
 
-        <MDXEditor setItineraryForm={setItineraryForm} />
+        <MDXEditor markdown={itineraryForm.markdown} setItineraryForm={setItineraryForm} />
 
-        <Button type="submit" color="primary" className="w-fit self-center mt-3">Submit</Button>
+        <Button
+          type="submit"
+          color="primary"
+          className="w-fit self-center mt-3"
+        >
+          Submit
+        </Button>
       </form>
     </div>
   );
