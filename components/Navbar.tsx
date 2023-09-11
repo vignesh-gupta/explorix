@@ -13,6 +13,7 @@ import {
   NavbarMenuItem,
 } from "@nextui-org/react";
 import { SignInButton, UserButton, useClerk } from "@clerk/nextjs";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -69,6 +70,9 @@ export default function Navbar() {
       </NavbarContent>
 
       <NavbarContent justify="end">
+        <NavbarItem>
+          <ThemeSwitcher />
+        </NavbarItem>
         <NavbarItem suppressHydrationWarning>
           {user ? (
             <button>
