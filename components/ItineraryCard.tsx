@@ -1,24 +1,54 @@
-import { Card, CardBody, CardHeader, Image } from '@nextui-org/react'
-import React from 'react'
+import { Card, CardBody, CardHeader } from "@nextui-org/react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React from "react";
 
-const ItineraryCard = () => {
+type ItineraryCardProps = {
+  destination: string;
+  budget: string;
+  duration: string;
+  imgUrl: string;
+  id: string;
+};
+
+const ItineraryCard = ({
+  budget,
+  destination,
+  imgUrl,
+  duration,
+  id,
+}: ItineraryCardProps) => {
+  const router = useRouter();
+
+  function handleCardClick() {
+    console.log("clicked");
+    console.log(id);
+    
+    router.push(`/itinerary/${id}`);
+  }
+
   return (
-    <Card className="py-4" isPressable>
-    <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-      <Image
-        alt="Card background"
-        className="object-cover rounded-xl"
-        src="https://images.unsplash.com/photo-1682685797303-0ad51eb23e13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-        width={270}
-      />
-    </CardHeader>
-    <CardBody className="overflow-visible py-2">
-      <p className="text-tiny uppercase font-bold">Daily Mix</p>
-      <small className="text-default-500">12 Tracks</small>
-      <h4 className="font-bold text-large">Frontend Radio</h4>
-    </CardBody>
-  </Card>
-  )
-}
+    <Card
+      className="py-2 gap-2 justify-between"
+      isPressable
+      onPress={handleCardClick}
+    >
+      <CardHeader className="h-2/3 pb-0 pt-2 px-4 flex-col overflow-hidden items-start">
+        <Image
+          width={300}
+          height={400}
+          alt="Card background"
+          className="object-fill w-full h-full rounded-xl"
+          src={imgUrl}
+        />
+      </CardHeader>
+      <CardBody className="grow py-2">
+        <p className="text-tiny uppercase font-bold">{duration} days</p>
+        <small className="text-default-500">$ {budget}</small>
+        <h4 className="font-bold text-large">{destination}</h4>
+      </CardBody>
+    </Card>
+  );
+};
 
-export default ItineraryCard
+export default ItineraryCard;

@@ -16,7 +16,7 @@ export const getOne = query({
     return ctx.db.get(args.itineraryId);
   },
 });
-
+// TODO: Add image upload
 export const create = mutation({
   args: {
     destination: v.string(),
@@ -30,6 +30,7 @@ export const create = mutation({
       budget: args.budget,
       plan: args.markdown,
       days: args.days,
+      imgUrl: "",
      });
   }
 });
