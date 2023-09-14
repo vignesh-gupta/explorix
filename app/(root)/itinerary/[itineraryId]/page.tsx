@@ -26,10 +26,10 @@ const ItineraryDetailPage = ({
       </h1>
 
       <div className="flex gap-3">
-        <p className="p-1 px-2 text-sm bg-blue-300 m-1 rounded-full">
+        <p className="p-1 px-2 text-sm bg-primary-100 m-1 rounded-full">
           {ItineraryDetail?.days} days
         </p>
-        <p className="p-1 px-2 text-sm bg-blue-300 m-1 rounded-full">
+        <p className="p-1 px-2 text-sm bg-secondary-100 m-1 rounded-full">
           under $ {ItineraryDetail?.budget}
         </p>
       </div>

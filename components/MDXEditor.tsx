@@ -24,7 +24,7 @@ import {
   tablePlugin,
   thematicBreakPlugin,
   toolbarPlugin,
-  ListsToggle
+  ListsToggle,
 } from "@mdxeditor/editor";
 import { useTheme } from "next-themes";
 import clsx from "clsx";
@@ -47,13 +47,48 @@ type EditorProps = {
   >;
 };
 
+const readOnlyPlugins = [
+  listsPlugin(),
+  quotePlugin(),
+  headingsPlugin(),
+  linkPlugin(),
+  linkDialogPlugin(),
+  tablePlugin(),
+  thematicBreakPlugin(),
+  frontmatterPlugin(),
+  codeBlockPlugin({ defaultCodeBlockLanguage: "txt" }),
+  codeMirrorPlugin({
+    codeBlockLanguages: {
+      js: "JavaScript",
+      css: "CSS",
+      txt: "text",
+      tsx: "TypeScript",
+    },
+  }),
+  directivesPlugin({
+    directiveDescriptors: [AdmonitionDirectiveDescriptor],
+  }),
+  diffSourcePlugin({ viewMode: "rich-text", diffMarkdown: "boo" }),
+  markdownShortcutPlugin(),
+];
+
+const allPlugins = [
+  toolbarPlugin({
+    toolbarContents: () => (
+      <div className="flex flex-wrap">
+        <UndoRedo /> <BoldItalicUnderlineToggles /> <InsertTable />
+        <BlockTypeSelect /> <CreateLink /> <ListsToggle />
+      </div>
+    ),
+  }),
+  ...readOnlyPlugins,
+];
+
 export default function Editor({
   isPreview = false,
   setItineraryForm,
-  markdown
+  markdown,
 }: EditorProps) {
-
-
   const handleChange = (md: string) => {
     if (setItineraryForm) {
       setItineraryForm((prev) => ({
@@ -71,46 +106,11 @@ export default function Editor({
         onChange={handleChange}
         readOnly={isPreview}
         className={clsx(
-          "border-gray-600 border-1 rounded-lg w-full",
+          "border-gray-600 border-1 rounded-lg w-full mt-3",
           theme === "dark" && "dark-theme dark-editor"
         )}
         markdown={markdown}
-        plugins={[
-          toolbarPlugin({
-            toolbarContents: () => {
-              if (isPreview) return null;
-
-              return (
-                <div className="flex flex-wrap">
-                  <UndoRedo /> <BoldItalicUnderlineToggles /> <InsertTable />
-                  <BlockTypeSelect /> <CreateLink />  <ListsToggle />
-                </div>
-              );
-            },
-          }),
-          listsPlugin(),
-          quotePlugin(),
-          headingsPlugin(),
-          linkPlugin(),
-          linkDialogPlugin(),
-          tablePlugin(),
-          thematicBreakPlugin(),
-          frontmatterPlugin(),
-          codeBlockPlugin({ defaultCodeBlockLanguage: "txt" }),
-          codeMirrorPlugin({
-            codeBlockLanguages: {
-              js: "JavaScript",
-              css: "CSS",
-              txt: "text",
-              tsx: "TypeScript",
-            },
-          }),
-          directivesPlugin({
-            directiveDescriptors: [AdmonitionDirectiveDescriptor],
-          }),
-          diffSourcePlugin({ viewMode: "rich-text", diffMarkdown: "boo" }),
-          markdownShortcutPlugin(),
-        ]}
+        plugins={isPreview ? readOnlyPlugins : allPlugins}
       />
     </>
   );

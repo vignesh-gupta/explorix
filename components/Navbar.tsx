@@ -35,6 +35,10 @@ export default function Navbar() {
       href: "/itinerary",
     },
     {
+      title: "Plan",
+      href: "/itinerary/create",
+    },
+    {
       title: "Contact",
       href: "/contact",
     },
@@ -54,13 +58,17 @@ export default function Navbar() {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarBrand>
-          <p className="font-bold text-inherit">Explorix</p>
+      <NavbarContent className="hidden sm:flex gap-1" justify="center">
+        <NavbarBrand className="mr-4">
+          <Link href="/" className="font-bold text-inherit">Explorix</Link>
         </NavbarBrand>
         {menuItems.map((item) => (
           <NavbarItem key={item.title}>
-            <Link color="foreground" className="capitalize" href={item.href}>
+            <Link
+              color="foreground"
+              className="capitalize hover:bg-secondary hover:text-secondary-foreground py-2 px-3 rounded-xl"
+              href={item.href}
+            >
               {item.title}
             </Link>
           </NavbarItem>

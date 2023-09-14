@@ -22,20 +22,20 @@ const ItineraryCard = ({
 
   return (
     <Card
-      className="py-2 gap-2 justify-between"
+      className="py-2 hover:pt-0 gap-2 justify-between group transition-transform duration-200 "
       isPressable
       onPress={() => router.push(`/itinerary/${id}`)}
     >
-      <CardHeader className="h-2/3 pb-0 pt-2 px-4 flex-col overflow-hidden items-start">
+      <CardHeader className="h-2/3 pb-0 pt-2 px-4 flex-col overflow-hidden items-start ">
         <Image
           width={300}
           height={400}
           alt="Card background"
-          className="object-fill w-full h-full rounded-xl"
+          className="object-fill w-full h-full rounded-xl overflow-hidden group-hover:scale-150 transition-transform duration-200 "
           src={imgUrl}
         />
       </CardHeader>
-      <CardBody className="grow py-2 h-auto overflow-visible">
+      <CardBody className="grow py-2 group-hover:pb-4 group-hover:-translate-y-1 h-auto overflow-visible transition-transform duration-200">
         <p className="text-tiny uppercase font-bold">{duration} days</p>
         <small className="text-default-500">$ {budget}</small>
         <h4 className="font-bold text-large">{destination}</h4>
