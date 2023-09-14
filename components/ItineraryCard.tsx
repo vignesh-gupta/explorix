@@ -20,18 +20,11 @@ const ItineraryCard = ({
 }: ItineraryCardProps) => {
   const router = useRouter();
 
-  function handleCardClick() {
-    console.log("clicked");
-    console.log(id);
-    
-    router.push(`/itinerary/${id}`);
-  }
-
   return (
     <Card
       className="py-2 gap-2 justify-between"
       isPressable
-      onPress={handleCardClick}
+      onPress={() => router.push(`/itinerary/${id}`)}
     >
       <CardHeader className="h-2/3 pb-0 pt-2 px-4 flex-col overflow-hidden items-start">
         <Image
@@ -42,7 +35,7 @@ const ItineraryCard = ({
           src={imgUrl}
         />
       </CardHeader>
-      <CardBody className="grow py-2">
+      <CardBody className="grow py-2 h-auto overflow-visible">
         <p className="text-tiny uppercase font-bold">{duration} days</p>
         <small className="text-default-500">$ {budget}</small>
         <h4 className="font-bold text-large">{destination}</h4>

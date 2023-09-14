@@ -25,7 +25,7 @@ export default function RootLayout({
       <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
-          <Providers className="flex flex-col min-h-screen justify-center">{children}</Providers>
+          <Providers className="flex flex-col min-h-screen justify-center items-center">{children}</Providers>
         </body>
       </html>
      </ClerkProvider>

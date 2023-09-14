@@ -31,7 +31,7 @@ import clsx from "clsx";
 
 const MDXEditor = dynamic(
   () => import("@mdxeditor/editor").then((mod) => mod.MDXEditor),
-  { ssr: false }
+  { ssr: false, loading: () => <p>Loading...</p> }
 );
 
 type EditorProps = {

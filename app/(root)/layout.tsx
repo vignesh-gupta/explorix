@@ -5,7 +5,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Navbar />
-      <main className=" grow flex flex-col items-center">{children}</main>
+      <main className=" grow flex flex-col items-center max-w-[1024px] w-full">{children}</main>
     </>
   );
 };

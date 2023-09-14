@@ -26,12 +26,18 @@ export default function Navbar() {
   // })()
 
   const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
+    {
+      title: "Home",
+      href: "/",
+    },
+    {
+      title: "Trips",
+      href: "/itinerary",
+    },
+    {
+      title: "Contact",
+      href: "/contact",
+    },
   ];
 
   return (
@@ -52,21 +58,13 @@ export default function Navbar() {
         <NavbarBrand>
           <p className="font-bold text-inherit">Explorix</p>
         </NavbarBrand>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem>
+        {menuItems.map((item) => (
+          <NavbarItem key={item.title}>
+            <Link color="foreground" className="capitalize" href={item.href}>
+              {item.title}
+            </Link>
+          </NavbarItem>
+        ))}
       </NavbarContent>
 
       <NavbarContent justify="end">
@@ -88,9 +86,14 @@ export default function Navbar() {
 
       <NavbarMenu>
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link className="w-full" color="foreground" href="#" size="lg">
-              {item}
+          <NavbarMenuItem key={item.href} className="list-none">
+            <Link
+              className="w-full"
+              color="foreground"
+              href={item.href}
+              size="lg"
+            >
+              {item.title}
             </Link>
           </NavbarMenuItem>
         ))}

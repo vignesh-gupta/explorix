@@ -17,8 +17,17 @@ const ItineraryDetailPage = ({
 }: ItineraryDetailPageProps) => {
   const ItineraryDetail = useQuery(api.itinerary.getOne, { itineraryId });
 
+  console.log("ItineraryDetail", ItineraryDetail);
+  
   return (
-    <div className="py-10">
+    <div className="py-10 w-full px-8 flex flex-col items-center">
+      <h1 className="text-4xl font-bold mb-4"> {ItineraryDetail?.destination} </h1>
+      
+      <div className="flex gap-3">
+        <p>Days - {ItineraryDetail?.days} days </p>
+        <p>Budget - $ {ItineraryDetail?.budget} </p>
+      </div>
+
       {ItineraryDetail?.plan ? (
         <MDXEditor isPreview markdown={ItineraryDetail.plan} />
       ) : null}
