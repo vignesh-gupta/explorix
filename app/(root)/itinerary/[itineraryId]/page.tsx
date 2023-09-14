@@ -18,14 +18,20 @@ const ItineraryDetailPage = ({
   const ItineraryDetail = useQuery(api.itinerary.getOne, { itineraryId });
 
   console.log("ItineraryDetail", ItineraryDetail);
-  
+
   return (
     <div className="py-10 w-full px-8 flex flex-col items-center">
-      <h1 className="text-4xl font-bold mb-4"> {ItineraryDetail?.destination} </h1>
-      
+      <h1 className="text-4xl font-bold mb-4">
+        {ItineraryDetail?.destination}
+      </h1>
+
       <div className="flex gap-3">
-        <p>Days - {ItineraryDetail?.days} days </p>
-        <p>Budget - $ {ItineraryDetail?.budget} </p>
+        <p className="p-1 px-2 text-sm bg-blue-300 m-1 rounded-full">
+          {ItineraryDetail?.days} days
+        </p>
+        <p className="p-1 px-2 text-sm bg-blue-300 m-1 rounded-full">
+          under $ {ItineraryDetail?.budget}
+        </p>
       </div>
 
       {ItineraryDetail?.plan ? (
