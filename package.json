@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "condev" : "convex dev"
+    "condev": "convex dev"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.23.2",
@@ -26,6 +26,7 @@
     "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.11.0",
     "typescript": "5.2.2"
   },
   "devDependencies": {

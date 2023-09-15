@@ -19,11 +19,6 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const { user } = useClerk();
-  // (async function(){
-
-  //   console.log(user);
-
-  // })()
 
   const menuItems = [
     {

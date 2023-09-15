@@ -2,6 +2,7 @@ import { Card, CardBody, CardHeader } from "@nextui-org/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
+import hero from "../public/hero.jpg";
 
 type ItineraryCardProps = {
   destination: string;
@@ -22,12 +23,13 @@ const ItineraryCard = ({
 
   return (
     <Card
-      className="py-2 hover:pt-0 gap-2 justify-between group transition-transform duration-200 "
+      className="pb-2 gap-2 justify-between group transition-transform duration-200 "
       isPressable
       onPress={() => router.push(`/itinerary/${id}`)}
     >
-      <CardHeader className="h-2/3 pb-0 pt-2 px-4 flex-col overflow-hidden items-start ">
+      <CardHeader className="h-2/3 pb-0 mt-2 group-hover:mt-0 px-4 flex-col overflow-hidden items-start ">
         <Image
+          loading="lazy"
           width={300}
           height={400}
           alt="Card background"
@@ -35,7 +37,7 @@ const ItineraryCard = ({
           src={imgUrl}
         />
       </CardHeader>
-      <CardBody className="grow py-2 group-hover:pb-4 group-hover:-translate-y-1 h-auto overflow-visible transition-transform duration-200">
+      <CardBody className="grow py-2 h-auto overflow-visible transition-transform duration-200">
         <p className="text-tiny uppercase font-bold">{duration} days</p>
         <small className="text-default-500">$ {budget}</small>
         <h4 className="font-bold text-large">{destination}</h4>
