@@ -5,8 +5,11 @@ import MDXEditor from "@/components/MDXEditor";
 import { Button, Input } from "@nextui-org/react";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import CoverImage from "@/components/CoverImage";
 
 const ItineraryCreate = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   const itineraryFormSubmit = useMutation(api.itinerary.create);
 
   const [itineraryForm, setItineraryForm] = useState({
@@ -15,6 +18,12 @@ const ItineraryCreate = () => {
     budget: "0",
     markdown: "# Detailed Plan",
   });
+
+  const handleImageChange = (val: string) => {
+    console.log(val);
+
+    setSelectedImage(val!);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -32,6 +41,7 @@ const ItineraryCreate = () => {
 
   return (
     <div className="w-full h-full md:p-10 p-4 md:max-w-5xl">
+      <CoverImage value={selectedImage || ""} onChange={handleImageChange} />
       <h1 className="text-3xl font-semibold mb-3">
         Create your own Itinerary plan
       </h1>
@@ -67,7 +77,10 @@ const ItineraryCreate = () => {
           />
         </div>
 
-        <MDXEditor markdown={itineraryForm.markdown} setItineraryForm={setItineraryForm} />
+        <MDXEditor
+          markdown={itineraryForm.markdown}
+          setItineraryForm={setItineraryForm}
+        />
 
         <Button
           type="submit"

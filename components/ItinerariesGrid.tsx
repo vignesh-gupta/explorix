@@ -20,7 +20,7 @@ const ItineraryGrid = ({ className }: ItineraryGridProps) => {
         className
       )}
     >
-      {[...itineraries, ...itineraries]?.map((itinerary) => (
+      {itineraries?.map((itinerary) => (
         <ItineraryCard
           id={itinerary._id}
           duration={itinerary.days}

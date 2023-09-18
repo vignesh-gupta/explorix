@@ -5,6 +5,7 @@ import { Id } from "@/convex/_generated/dataModel";
 import MDXEditor from "@/components/MDXEditor";
 import { useQuery } from "convex/react";
 import React from "react";
+import CoverImage from "@/components/CoverImage";
 
 type ItineraryDetailPageProps = {
   params: {
@@ -17,10 +18,10 @@ const ItineraryDetailPage = ({
 }: ItineraryDetailPageProps) => {
   const ItineraryDetail = useQuery(api.itinerary.getOne, { itineraryId });
 
-  console.log("ItineraryDetail", ItineraryDetail);
-
   return (
     <div className="py-10 w-full px-8 flex flex-col items-center">
+      <CoverImage value={ItineraryDetail?.imgUrl} />
+
       <h1 className="text-4xl font-bold mb-4">
         {ItineraryDetail?.destination}
       </h1>
