@@ -19,7 +19,7 @@ const ItineraryCreate = () => {
     markdown: "# Detailed Plan",
   });
 
-  const handleImageChange = (val: string) => {
+  const handleImageChange = (val: string | null) => {
     console.log(val);
 
     setSelectedImage(val!);
