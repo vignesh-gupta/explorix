@@ -23,14 +23,15 @@ export const create = mutation({
     days: v.string(),
     budget: v.string(),
     markdown: v.string(),
+    coverImage: v.string(),
   },
   handler: async (ctx, args) => {
-    return await ctx.db.insert("itineraries", { 
+    return await ctx.db.insert("itineraries", {
       destination: args.destination,
       budget: args.budget,
       plan: args.markdown,
       days: args.days,
-      imgUrl: "",
-     });
-  }
+      imgUrl: args.coverImage,
+    });
+  },
 });

@@ -5,10 +5,14 @@ import MDXEditor from "@/components/MDXEditor";
 import { Button, Input } from "@nextui-org/react";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import CoverImage from "@/components/CoverImage";
+import { useRouter } from "next/navigation";
+import UploadImage from "@/components/UploadImage";
 
 const ItineraryCreate = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isFormSubmitting, setIsFormSubmitting] = useState(false);
+
+  const router = useRouter();
 
   const itineraryFormSubmit = useMutation(api.itinerary.create);
 
@@ -19,11 +23,7 @@ const ItineraryCreate = () => {
     markdown: "# Detailed Plan",
   });
 
-  const handleImageChange = (val: string | null) => {
-    console.log(val);
-
-    setSelectedImage(val!);
-  };
+  const handleImageChange = (val: string | null) => setSelectedImage(val!);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -35,13 +35,21 @@ const ItineraryCreate = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(itineraryForm);
-    itineraryFormSubmit(itineraryForm);
+    setIsFormSubmitting(true);
+    itineraryFormSubmit({ ...itineraryForm, coverImage: selectedImage || "" })
+      .then((res) => {
+        router.push(`/itinerary/${res}`);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Error creating itinerary");
+        setIsFormSubmitting(false);
+      });
   };
 
   return (
     <div className="w-full h-full md:p-10 p-4 md:max-w-5xl">
-      <CoverImage value={selectedImage || ""} onChange={handleImageChange} />
+      <UploadImage value={selectedImage || ""} onChange={handleImageChange} />
       <h1 className="text-3xl font-semibold mb-3">
         Create your own Itinerary plan
       </h1>
@@ -86,6 +94,7 @@ const ItineraryCreate = () => {
           type="submit"
           color="primary"
           className="w-fit self-center mt-3"
+          isLoading={isFormSubmitting}
         >
           Submit
         </Button>

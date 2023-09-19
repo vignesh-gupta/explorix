@@ -9,8 +9,4 @@ export default defineSchema({
     imgUrl: v.string(),
     plan: v.string(),
   }),
-  tasks: defineTable({
-    isCompleted: v.boolean(),
-    text: v.string(),
-  }),
 });
