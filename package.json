@@ -19,7 +19,7 @@
     "@prisma/client": "^5.2.0",
     "@tailwindcss/typography": "^0.5.10",
     "clsx": "^2.0.0",
-    "convex": "^1.2.1",
+    "convex": "^1.11.0",
     "framer-motion": "^11.0.20",
     "lucide-react": "^0.274.0",
     "next": "13.4.19",
