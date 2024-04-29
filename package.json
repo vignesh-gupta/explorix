@@ -10,7 +10,7 @@
     "condev": "convex dev"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.29.11",
+    "@clerk/nextjs": "^5.0.3",
     "@clerk/themes": "^1.7.5",
     "@cloudinary/react": "^1.11.2",
     "@cloudinary/url-gen": "^1.11.2",
