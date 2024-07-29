@@ -18,7 +18,7 @@
     "@nextui-org/react": "^2.1.10",
     "@prisma/client": "^5.15.1",
     "@tailwindcss/typography": "^0.5.10",
-    "clsx": "^2.0.0",
+    "clsx": "^2.1.1",
     "convex": "^1.12.1",
     "framer-motion": "^11.3.8",
     "lucide-react": "^0.274.0",
