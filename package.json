@@ -14,7 +14,7 @@
     "@clerk/themes": "^2.1.33",
     "@cloudinary/react": "^1.11.2",
     "@cloudinary/url-gen": "^1.21.0",
-    "@mdxeditor/editor": "^3.11.0",
+    "@mdxeditor/editor": "^3.31.0",
     "@nextui-org/react": "^2.6.10",
     "@prisma/client": "^6.5.0",
     "@tailwindcss/typography": "^0.5.10",
